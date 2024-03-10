@@ -1,0 +1,38 @@
+#sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #343a40;
+    color: white;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1;
+  }
+  
+  .sidebar-header {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .logo {
+    width: 150px;
+  }
+  
+  .list-group-item {
+    border: none;
+    width: 100%;
+    border-radius: 0;
+    margin-top: 1vh;
+  }
+  
+  .list-group-item:hover {
+    background-color: #495057;
+  }
+  
+  .list-group-item.active {
+    background-color: #495057;
+  }
+  #logout{
+    background: rgb(244, 167, 167);
+    color: rgb(93, 27, 27);
+  }

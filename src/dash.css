@@ -1,0 +1,38 @@
+#sidebar {
+    background-color: #343a40;
+    min-height: 100vh;
+    color: white;
+  }
+  
+  #sidebar .list-group-item {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  #sidebar .list-group-item:hover {
+    background-color: #495057;
+  }
+  
+  #sidebar .list-group-item.active {
+    background-color: #212529;
+  }
+  
+  #page-content {
+    padding: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    #sidebar {
+      position: fixed;
+      width: 100%;
+      z-index: 1;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+  
+    #page-content {
+      margin-left: 0;
+    }
+  }
+  
