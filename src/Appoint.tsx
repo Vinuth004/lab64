@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./appoint.css";
-
+import Navbar from "./Nav";
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchText, setSearchText] = useState("");
@@ -36,6 +36,8 @@ const App: React.FC = () => {
   };
 
   return (
+    <div>
+      <Navbar/>
     <div className="container">
       <h1>Appointments</h1>
       <button className="btn invert">Add +</button>
@@ -74,6 +76,7 @@ const App: React.FC = () => {
           Next &raquo;
         </button>
       </div>
+    </div>
     </div>
   );
 };

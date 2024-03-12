@@ -1,7 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './settings.css';
-
+import Navbar from './Nav';
 const UserSettings: React.FC = () => {
     const handleDeleteAccount = () => {
         if (window.confirm("Are you sure you want to delete your account?")) {
@@ -16,6 +16,8 @@ const UserSettings: React.FC = () => {
     };
 
     return (
+        <div>
+        <Navbar />
         <div className="container">
             <div className="card">
                 <div className="card-header">
@@ -50,6 +52,7 @@ const UserSettings: React.FC = () => {
                     <a href="#" className="btn btn-secondary mt-3" onClick={handleLogout}>Logout</a>
                 </div>
             </div>
+        </div>
         </div>
     );
 };

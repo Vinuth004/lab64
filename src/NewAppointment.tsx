@@ -1,9 +1,11 @@
 import React from 'react';
 import './new_app.css'
+import Navbar from './Nav';
 class AppointmentForm extends React.Component {
     render() {
         return (
             <div>
+                <Navbar />
                 <h1>New Appointment</h1>
                 <hr />
                 <br />
