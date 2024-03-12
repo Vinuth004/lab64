@@ -6,7 +6,8 @@ import Register from './Register.tsx'
 // import App from './Dashboard.tsx'
 import App from './Appoint.tsx'
 import AppointmentForm from './NewAppointment.tsx'
+import UserSettings from './Settings.tsx'
 ReactDOM.createRoot(document.getElementById('root')!).render(
 
-  <AppointmentForm />
+  <UserSettings/>
 )
