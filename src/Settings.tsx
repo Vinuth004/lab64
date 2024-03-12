@@ -2,6 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './settings.css';
 import Navbar from './Nav';
+import Footer from './Footer';
 const UserSettings: React.FC = () => {
     const handleDeleteAccount = () => {
         if (window.confirm("Are you sure you want to delete your account?")) {
@@ -53,6 +54,7 @@ const UserSettings: React.FC = () => {
                 </div>
             </div>
         </div>
+        <Footer/>
         </div>
     );
 };

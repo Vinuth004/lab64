@@ -1,6 +1,7 @@
 import React from 'react';
 import './new_app.css'
 import Navbar from './Nav';
+import Footer from './Footer';
 class AppointmentForm extends React.Component {
     render() {
         return (
@@ -22,7 +23,6 @@ class AppointmentForm extends React.Component {
                         <option value="bloodTest">Blood Test</option>
                         <option value="urineTest">Urine Test</option>
                         <option value="xray">X-ray</option>
-                        {/* Add more options as needed */}
                     </select>
 
                     <label htmlFor="description">Description:</label>
@@ -30,6 +30,8 @@ class AppointmentForm extends React.Component {
 
                     <button type="submit">Add</button>
                 </form>
+                <br/>
+                <Footer/>
             </div>
         );
     }

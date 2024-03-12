@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./appoint.css";
 import Navbar from "./Nav";
+import Footer from './Footer';
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchText, setSearchText] = useState("");
@@ -77,6 +78,7 @@ const App: React.FC = () => {
         </button>
       </div>
     </div>
+    <Footer/>
     </div>
   );
 };
