@@ -10,5 +10,5 @@ import UserSettings from './Settings.tsx'
 import ChatPage from './Chat.tsx'
 ReactDOM.createRoot(document.getElementById('root')!).render(
 
-  <ChatPage/>
+  <App/>
 )

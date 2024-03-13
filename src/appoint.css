@@ -45,9 +45,11 @@ h1 {
 
 .btn:hover {
     background-color: #0056b3;
+    color: white;
 }
 .lil:hover{
     background-color: black;
+    color: white;
 }
 .pagination {
     margin-top: 20px;
