@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Plot from 'react-plotly.js';
+import ChatList from './ChatList';
 function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [currentScreen, setCurrentScreen] = useState('user');
@@ -53,6 +54,7 @@ function App() {
           <li onClick={() => switchScreen('user')}>User Management</li>
           <li onClick={() => switchScreen('heir')}>Hierarchy Management</li>
           <li onClick={() => switchScreen('reports')}>Reports</li>
+          <li onClick={() => switchScreen('chat')}>Help/Feedbacks</li>
         </ul>
       </nav>
       <header>
@@ -170,6 +172,9 @@ function App() {
     />
     </div>
         )}
+{currentScreen === 'chat' && (
+  <ChatList/>
+)}
       </main>
     </div>
   );
