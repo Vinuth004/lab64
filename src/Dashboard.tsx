@@ -3,6 +3,8 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Plot from 'react-plotly.js';
 import ChatList from './ChatList';
+import { Modal, Button } from 'react-bootstrap';
+
 function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [currentScreen, setCurrentScreen] = useState('user');
@@ -10,6 +12,21 @@ function App() {
   const [rowsPerPage] = useState(8); // Number of rows per page
   const [searchTerm, setSearchTerm] = useState(''); // State for search term
 
+  const [showModal, setShowModal] = useState(false); // State to track modal open/close
+  const [editRowIndex, setEditRowIndex] = useState<number | null>(null); // State to track the index of row being edited
+
+  // Function to open the modal for editing
+  const openModal = (index: number) => {
+    setShowModal(true);
+    setEditRowIndex(index);
+  };
+
+  // Function to close the modal
+  const closeModal = () => {
+    setShowModal(false);
+    setEditRowIndex(null);
+  };
+  
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -55,6 +72,7 @@ function App() {
           <li onClick={() => switchScreen('heir')}>Hierarchy Management</li>
           <li onClick={() => switchScreen('reports')}>Reports</li>
           <li onClick={() => switchScreen('chat')}>Help/Feedbacks</li>
+          <li onClick={() => switchScreen('test')}>Tests Management</li>
         </ul>
       </nav>
       <header>
@@ -67,52 +85,7 @@ function App() {
       <main>
         {currentScreen === 'user' && (
           <div>
-            <h1>User Management</h1>
-            {/* Search input */}
-            <input
-              type="text"
-              placeholder="Search..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-            <table>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Actions</th>
-                  {/* Add more headers as needed */}
-                </tr>
-              </thead>
-              <tbody>
-                {/* Display current rows */}
-                {currentRows.map((row, index) => (
-                  <tr key={index}>
-                    <td>{row.name}</td>
-                    <td>{row.email}</td>
-                    <td>
-                      <button>Edit</button>
-                      <button>Delete</button>
-                    </td>
-                    {/* Add more columns as needed */}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            {/* Pagination */}
-            <div className="pagination">
-              <button onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>
-                Previous
-              </button>
-              <button onClick={() => paginate(currentPage + 1)} disabled={indexOfLastRow >= filteredData.length}>
-                Next
-              </button>
-            </div>
-          </div>
-        )}
-        {currentScreen === 'heir' && (
-          <div>
-          <h1>Heirarchy Management</h1>
+          <h1>User Management</h1>
           {/* Search input */}
           <input
             type="text"
@@ -136,8 +109,8 @@ function App() {
                   <td>{row.name}</td>
                   <td>{row.email}</td>
                   <td>
-                    <button>Edit</button>
-                    <button>Delete</button>
+                    <Button className='GAP' variant='secondary' onClick={() => openModal(index)}>Edit</Button>
+                    <Button className='GAP' variant='danger'>Delete</Button>
                   </td>
                   {/* Add more columns as needed */}
                 </tr>
@@ -146,13 +119,163 @@ function App() {
           </table>
           {/* Pagination */}
           <div className="pagination">
-            <button onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>
+            <Button className='GAP' onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>
               Previous
-            </button>
-            <button onClick={() => paginate(currentPage + 1)} disabled={indexOfLastRow >= filteredData.length}>
+            </Button>
+            <Button className='GAP' onClick={() => paginate(currentPage + 1)} disabled={indexOfLastRow >= filteredData.length}>
               Next
-            </button>
+            </Button>
           </div>
+          {/* Bootstrap Modal */}
+          <Modal show={showModal} onHide={closeModal}>
+            <Modal.Header closeButton>
+              <Modal.Title>Edit Row</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              {/* Modal body content */}
+              <p>Edit row at index: {editRowIndex}</p>
+              <input type="text" />
+            </Modal.Body>
+            <Modal.Footer>
+            <Button variant="primary" >
+                Save
+              </Button>
+              <Button variant="secondary" onClick={closeModal}>
+                Close
+              </Button>
+              {/* Additional buttons if needed */}
+            </Modal.Footer>
+          </Modal>
+        </div>
+        )}
+        {currentScreen === 'test' && (
+          <div>
+          <h1>Tests Management</h1>
+          {/* Search input */}
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Actions</th>
+                {/* Add more headers as needed */}
+              </tr>
+            </thead>
+            <tbody>
+              {/* Display current rows */}
+              {currentRows.map((row, index) => (
+                <tr key={index}>
+                  <td>{row.name}</td>
+                  <td>{row.email}</td>
+                  <td>
+                    <Button className='GAP' variant='secondary' onClick={() => openModal(index)}>Edit</Button>
+                    <Button className='GAP' variant='danger'>Delete</Button>
+                  </td>
+                  {/* Add more columns as needed */}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {/* Pagination */}
+          <div className="pagination">
+            <Button className='GAP' onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>
+              Previous
+            </Button>
+            <Button className='GAP' onClick={() => paginate(currentPage + 1)} disabled={indexOfLastRow >= filteredData.length}>
+              Next
+            </Button>
+          </div>
+          {/* Bootstrap Modal */}
+          <Modal show={showModal} onHide={closeModal}>
+            <Modal.Header closeButton>
+              <Modal.Title>Edit Row</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              {/* Modal body content */}
+              <p>Edit row at index: {editRowIndex}</p>
+              <input type="text" />
+            </Modal.Body>
+            <Modal.Footer>
+            <Button variant="primary" >
+                Save
+              </Button>
+              <Button variant="secondary" onClick={closeModal}>
+                Close
+              </Button>
+              {/* Additional buttons if needed */}
+            </Modal.Footer>
+          </Modal>
+        </div>
+        )}
+        {currentScreen === 'heir' && (
+          <div>
+          <h1>Hierarchy Management</h1>
+          {/* Search input */}
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Actions</th>
+                {/* Add more headers as needed */}
+              </tr>
+            </thead>
+            <tbody>
+              {/* Display current rows */}
+              {currentRows.map((row, index) => (
+                <tr key={index}>
+                  <td>{row.name}</td>
+                  <td>{row.email}</td>
+                  <td>
+                    <Button className='GAP' variant='secondary' onClick={() => openModal(index)}>Edit</Button>
+                    <Button className='GAP' variant='danger'>Delete</Button>
+                  </td>
+                  {/* Add more columns as needed */}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {/* Pagination */}
+          <div className="pagination">
+            <Button className='GAP' onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>
+              Previous
+            </Button>
+            <Button className='GAP' onClick={() => paginate(currentPage + 1)} disabled={indexOfLastRow >= filteredData.length}>
+              Next
+            </Button>
+          </div>
+          {/* Bootstrap Modal */}
+          <Modal show={showModal} onHide={closeModal}>
+            <Modal.Header closeButton>
+              <Modal.Title>Edit Row</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              {/* Modal body content */}
+              <p>Edit row at index: {editRowIndex}</p>
+              <input type="text" />
+            </Modal.Body>
+            <Modal.Footer>
+            <Button variant="primary" >
+                Save
+              </Button>
+              <Button variant="secondary" onClick={closeModal}>
+                Close
+              </Button>
+              {/* Additional buttons if needed */}
+            </Modal.Footer>
+          </Modal>
         </div>
         )}
         {currentScreen === 'reports' && (

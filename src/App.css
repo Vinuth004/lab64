@@ -97,3 +97,6 @@ table tr:nth-child(even) {
 table tr:hover {
   background-color: #ddd;
 }
+.GAP{
+  margin-left: 1vh;
+}
