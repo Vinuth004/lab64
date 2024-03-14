@@ -33,3 +33,6 @@
   .chat-list-container {
     margin-top: 50px; /* Adjust this value to leave space for the fixed search bar */
   }
+.GAP{
+  margin-left: 2vh;
+}
