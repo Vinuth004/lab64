@@ -14,7 +14,7 @@ function App() {
 
   const [showModal, setShowModal] = useState(false); // State to track modal open/close
   const [editRowIndex, setEditRowIndex] = useState<number | null>(null); // State to track the index of row being edited
-
+  const [showAddModal, setShowAddModal] = useState(false);
   // Function to open the modal for editing
   const openModal = (index: number) => {
     setShowModal(true);
@@ -27,6 +27,14 @@ function App() {
     setEditRowIndex(null);
   };
   
+  const openAddModal = () => {
+    setShowAddModal(true);
+  };
+
+  // Function to close the add modal
+  const closeAddModal = () => {
+    setShowAddModal(false);
+  };
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -84,25 +92,29 @@ function App() {
       </header>
       <main>
         {currentScreen === 'user' && (
-          <div>
-          <h1>User Management</h1>
-          {/* Search input */}
-          <input
-            type="text"
-            placeholder="Search..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Actions</th>
-                {/* Add more headers as needed */}
-              </tr>
-            </thead>
-            <tbody>
+              <div>
+              <h1>User Management</h1>
+
+              {/* Search input */}
+              <input
+                type="text"
+                placeholder="Search..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              {/* Add button */}
+              <Button className="" onClick={openAddModal}>Add +</Button>
+              <hr />
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                    {/* Add more headers as needed */}
+                  </tr>
+                </thead>
+                <tbody>
               {/* Display current rows */}
               {currentRows.map((row, index) => (
                 <tr key={index}>
@@ -116,58 +128,82 @@ function App() {
                 </tr>
               ))}
             </tbody>
-          </table>
-          {/* Pagination */}
-          <div className="pagination">
-            <Button className='GAP' onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>
-              Previous
-            </Button>
-            <Button className='GAP' onClick={() => paginate(currentPage + 1)} disabled={indexOfLastRow >= filteredData.length}>
-              Next
-            </Button>
-          </div>
-          {/* Bootstrap Modal */}
-          <Modal show={showModal} onHide={closeModal}>
-            <Modal.Header closeButton>
-              <Modal.Title>Edit Row</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              {/* Modal body content */}
-              <p>Edit row at index: {editRowIndex}</p>
-              <input type="text" />
-            </Modal.Body>
-            <Modal.Footer>
-            <Button variant="primary" >
-                Save
-              </Button>
-              <Button variant="secondary" onClick={closeModal}>
-                Close
-              </Button>
-              {/* Additional buttons if needed */}
-            </Modal.Footer>
-          </Modal>
-        </div>
+              </table>
+              {/* Pagination */}
+              <div className="pagination">
+                <Button className='GAP' onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>
+                  Previous
+                </Button>
+                <Button className='GAP' onClick={() => paginate(currentPage + 1)} disabled={indexOfLastRow >= filteredData.length}>
+                  Next
+                </Button>
+              </div>
+              {/* Bootstrap Modals */}
+              {/* Edit Modal */}
+              <Modal show={showModal} onHide={closeModal}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Edit Row</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  {/* Modal body content */}
+                  <p>Edit row at index: {editRowIndex}</p>
+                  <input type="text" />
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="primary">
+                    Save
+                  </Button>
+                  <Button variant="secondary" onClick={closeModal}>
+                    Close
+                  </Button>
+                  {/* Additional buttons if needed */}
+                </Modal.Footer>
+              </Modal>
+              {/* Add Modal */}
+              <Modal show={showAddModal} onHide={closeAddModal}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Add User</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  {/* Modal body content */}
+                  <p>Add new user form goes here</p>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="primary">
+                    Add
+                  </Button>
+                  <Button variant="secondary" onClick={closeAddModal}>
+                    Close
+                  </Button>
+                  {/* Additional buttons if needed */}
+                </Modal.Footer>
+              </Modal>
+            </div>
         )}
         {currentScreen === 'test' && (
-          <div>
-          <h1>Tests Management</h1>
-          {/* Search input */}
-          <input
-            type="text"
-            placeholder="Search..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Actions</th>
-                {/* Add more headers as needed */}
-              </tr>
-            </thead>
-            <tbody>
+              <div>
+              <h1>Test Management</h1>
+
+              {/* Search input */}
+              <input
+                type="text"
+                placeholder="Search..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              {/* Add button */}
+              <Button className="" onClick={openAddModal}>Add +</Button>
+              <hr />
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                    {/* Add more headers as needed */}
+                  </tr>
+                </thead>
+                <tbody>
               {/* Display current rows */}
               {currentRows.map((row, index) => (
                 <tr key={index}>
@@ -181,58 +217,82 @@ function App() {
                 </tr>
               ))}
             </tbody>
-          </table>
-          {/* Pagination */}
-          <div className="pagination">
-            <Button className='GAP' onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>
-              Previous
-            </Button>
-            <Button className='GAP' onClick={() => paginate(currentPage + 1)} disabled={indexOfLastRow >= filteredData.length}>
-              Next
-            </Button>
-          </div>
-          {/* Bootstrap Modal */}
-          <Modal show={showModal} onHide={closeModal}>
-            <Modal.Header closeButton>
-              <Modal.Title>Edit Row</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              {/* Modal body content */}
-              <p>Edit row at index: {editRowIndex}</p>
-              <input type="text" />
-            </Modal.Body>
-            <Modal.Footer>
-            <Button variant="primary" >
-                Save
-              </Button>
-              <Button variant="secondary" onClick={closeModal}>
-                Close
-              </Button>
-              {/* Additional buttons if needed */}
-            </Modal.Footer>
-          </Modal>
-        </div>
+              </table>
+              {/* Pagination */}
+              <div className="pagination">
+                <Button className='GAP' onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>
+                  Previous
+                </Button>
+                <Button className='GAP' onClick={() => paginate(currentPage + 1)} disabled={indexOfLastRow >= filteredData.length}>
+                  Next
+                </Button>
+              </div>
+              {/* Bootstrap Modals */}
+              {/* Edit Modal */}
+              <Modal show={showModal} onHide={closeModal}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Edit Row</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  {/* Modal body content */}
+                  <p>Edit row at index: {editRowIndex}</p>
+                  <input type="text" />
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="primary">
+                    Save
+                  </Button>
+                  <Button variant="secondary" onClick={closeModal}>
+                    Close
+                  </Button>
+                  {/* Additional buttons if needed */}
+                </Modal.Footer>
+              </Modal>
+              {/* Add Modal */}
+              <Modal show={showAddModal} onHide={closeAddModal}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Add Test</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  {/* Modal body content */}
+                  <p>Add new Test form goes here</p>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="primary">
+                    Add
+                  </Button>
+                  <Button variant="secondary" onClick={closeAddModal}>
+                    Close
+                  </Button>
+                  {/* Additional buttons if needed */}
+                </Modal.Footer>
+              </Modal>
+            </div>
         )}
         {currentScreen === 'heir' && (
-          <div>
-          <h1>Hierarchy Management</h1>
-          {/* Search input */}
-          <input
-            type="text"
-            placeholder="Search..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Actions</th>
-                {/* Add more headers as needed */}
-              </tr>
-            </thead>
-            <tbody>
+              <div>
+              <h1>Heirarchy Management</h1>
+
+              {/* Search input */}
+              <input
+                type="text"
+                placeholder="Search..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              {/* Add button */}
+              <Button className="" onClick={openAddModal}>Add +</Button>
+              <hr />
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                    {/* Add more headers as needed */}
+                  </tr>
+                </thead>
+                <tbody>
               {/* Display current rows */}
               {currentRows.map((row, index) => (
                 <tr key={index}>
@@ -246,37 +306,57 @@ function App() {
                 </tr>
               ))}
             </tbody>
-          </table>
-          {/* Pagination */}
-          <div className="pagination">
-            <Button className='GAP' onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>
-              Previous
-            </Button>
-            <Button className='GAP' onClick={() => paginate(currentPage + 1)} disabled={indexOfLastRow >= filteredData.length}>
-              Next
-            </Button>
-          </div>
-          {/* Bootstrap Modal */}
-          <Modal show={showModal} onHide={closeModal}>
-            <Modal.Header closeButton>
-              <Modal.Title>Edit Row</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              {/* Modal body content */}
-              <p>Edit row at index: {editRowIndex}</p>
-              <input type="text" />
-            </Modal.Body>
-            <Modal.Footer>
-            <Button variant="primary" >
-                Save
-              </Button>
-              <Button variant="secondary" onClick={closeModal}>
-                Close
-              </Button>
-              {/* Additional buttons if needed */}
-            </Modal.Footer>
-          </Modal>
-        </div>
+              </table>
+              {/* Pagination */}
+              <div className="pagination">
+                <Button className='GAP' onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>
+                  Previous
+                </Button>
+                <Button className='GAP' onClick={() => paginate(currentPage + 1)} disabled={indexOfLastRow >= filteredData.length}>
+                  Next
+                </Button>
+              </div>
+              {/* Bootstrap Modals */}
+              {/* Edit Modal */}
+              <Modal show={showModal} onHide={closeModal}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Edit Row</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  {/* Modal body content */}
+                  <p>Edit row at index: {editRowIndex}</p>
+                  <input type="text" />
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="primary">
+                    Save
+                  </Button>
+                  <Button variant="secondary" onClick={closeModal}>
+                    Close
+                  </Button>
+                  {/* Additional buttons if needed */}
+                </Modal.Footer>
+              </Modal>
+              {/* Add Modal */}
+              <Modal show={showAddModal} onHide={closeAddModal}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Add Heirarchy</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  {/* Modal body content */}
+                  <p>Add new Heirarchy form goes here</p>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="primary">
+                    Add
+                  </Button>
+                  <Button variant="secondary" onClick={closeAddModal}>
+                    Close
+                  </Button>
+                  {/* Additional buttons if needed */}
+                </Modal.Footer>
+              </Modal>
+            </div>
         )}
         {currentScreen === 'reports' && (
         <div>
