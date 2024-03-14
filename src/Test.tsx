@@ -8,7 +8,7 @@ const test = {
   doctor: 'Dr. Smith',
 };
 
-const App: React.FC = () => {
+const Test: React.FC = () => {
   return (
     <div className="App">
         <Navbar/>
@@ -18,4 +18,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default Test;

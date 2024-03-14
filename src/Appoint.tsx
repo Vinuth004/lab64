@@ -9,7 +9,7 @@ interface Appointment {
   time: string;
 }
 
-const App: React.FC = () => {
+const Appointments: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchText, setSearchText] = useState<string>("");
   const [activeTab, setActiveTab] = useState<string>("scheduled"); // Default to "scheduled"
@@ -106,4 +106,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default Appointments;

@@ -4,7 +4,7 @@ import Navbar from './Nav';
 import './chatlist.css';
 import {  Button } from 'react-bootstrap';
 
-const TestList: React.FC = () => {
+const Billlist: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
 
 
@@ -59,4 +59,4 @@ const TestList: React.FC = () => {
   );
 }
 
-export default TestList;
+export default Billlist;

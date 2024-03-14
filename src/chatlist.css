@@ -36,3 +36,9 @@
 .GAP{
   margin-left: 2vh;
 }
+.primary{
+  background: rgb(80, 80, 180);
+  color: white;
+  border: none;
+  padding: 1vh 3vh;
+}

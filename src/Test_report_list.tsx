@@ -56,8 +56,8 @@ const TestList: React.FC = () => {
                   <p>Time - {item.time}</p>
                   <p>Note - {item.note}</p>
                   <div>
-                    <Button className='' variant='primary' onClick={() => openModal(item)}>Edit</Button>
-                    <Button className='GAP' variant='danger'>Delete</Button>
+                    <button className='primary' onClick={() => openModal(item)}>Edit</button>
+                    <button className='primary GAP'>Delete</button>
                   </div>
                 </li>
               ))}
@@ -90,9 +90,9 @@ const TestList: React.FC = () => {
           )}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary">
+          <button className="primary">
             Save Changes
-          </Button>
+          </button>
           <Button variant="secondary" onClick={closeModal}>
             Close
           </Button>
